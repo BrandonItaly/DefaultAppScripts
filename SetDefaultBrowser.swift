@@ -29,7 +29,6 @@ let browser = CommandLine.arguments[1].lowercased()
 // Define browser bundle IDs
 let bundleID: String
 let appName: String
-let appNameShort: String
 
 switch browser {
 case "safari":
