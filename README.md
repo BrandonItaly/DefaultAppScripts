@@ -1,46 +1,50 @@
 # macOS Default App Setter Scripts
 
-Simple Swift scripts to set default mail and browser applications on macOS.
+Simple scripts to set default mail and browser applications on macOS.
 
-## Prerequisites
+## Option 1: Pre-compiled Executables (Recommended)
 
-### Terminal Accessibility Permissions
-The scripts use AppleScript automation to handle system prompts. Terminal.app needs accessibility permissions:
+Pre-compiled executables work on any macOS device without requiring developer tools.
 
-1. Go to System Settings > Privacy & Security > Accessibility
-2. Click the '+' button
-3. Navigate to and select Terminal.app
-4. Enable the permission
+### Installation
 
-## Installation
-
-1. Clone or download the scripts
-2. Make them executable:
+1. Download the pre-compiled binaries from the releases section
+2. Make them executable if needed:
 ```bash
-chmod +x SetDefaultMailApp.swift
-chmod +x SetDefaultBrowser.swift
+chmod +x bin/SetDefaultApp
 ```
 
-## Usage
+### Usage
 
-### Setting Default Mail App
+#### Combined App (Recommended)
 ```bash
-./SetDefaultMailApp.swift [mail-app]
+./bin/SetDefaultApp [option] [app]
 ```
 
-Supported mail apps:
-- `mail` - Apple Mail
-- `outlook` - Microsoft Outlook
+Options:
+- `browser` - Set default web browser
+- `mail` - Set default mail application
 
-Example:
+Examples:
 ```bash
-./SetDefaultMailApp.swift mail
+./bin/SetDefaultApp browser chrome
+./bin/SetDefaultApp mail outlook
 ```
 
-### Setting Default Browser
+#### Individual Executables (Legacy)
+If you prefer the separate executables, they are still available:
+
+Setting Default Mail App:
 ```bash
-./SetDefaultBrowser.swift [browser]
+./bin/SetDefaultMailApp [mail-app]
 ```
+
+Setting Default Browser:
+```bash
+./bin/SetDefaultBrowser [browser]
+```
+
+### Supported Applications
 
 Supported browsers:
 - `safari` - Safari
@@ -48,14 +52,59 @@ Supported browsers:
 - `firefox` - Firefox
 - `edge` - Microsoft Edge
 
-Example:
+Supported mail apps:
+- `mail` - Apple Mail
+- `outlook` - Microsoft Outlook
+
+## Option 2: Swift Source Files (For Developers)
+
+### Prerequisites
+
+- Xcode Command Line Tools installed
+
+### Installation
+
+1. Clone or download the Swift scripts
+2. Make them executable:
 ```bash
-./SetDefaultBrowser.swift chrome
+chmod +x SetDefaultApp.swift
 ```
+
+### Usage
+
+```bash
+./SetDefaultApp.swift browser chrome
+./SetDefaultApp.swift mail outlook
+```
+
+### Compiling to Standalone Executables
+
+If you have the developer tools and want to distribute binaries to users without them:
+
+1. Make the compile script executable:
+```bash
+chmod +x compile.sh
+```
+
+2. Run the compile script:
+```bash
+./compile.sh
+```
+
+3. Distribute the executables from the `bin` directory
+
+## Terminal Accessibility Permissions
+
+These scripts use system automation to handle prompts. Terminal.app needs accessibility permissions:
+
+1. Go to System Settings > Privacy & Security > Accessibility
+2. Click the '+' button
+3. Navigate to and select Terminal.app
+4. Enable the permission
 
 ## Notes
 
-- Scripts require macOS and Swift runtime (pre-installed on macOS)
+- Pre-compiled executables work without developer tools
 - The scripts will automatically handle system prompts if Terminal has proper permissions
 - Mail.app is searched for in `/System/Applications`
 - Third-party apps are searched in `/Applications` and `~/Applications`
